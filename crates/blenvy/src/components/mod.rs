@@ -1,11 +1,10 @@
 pub mod utils;
-pub use utils::*;
+use utils::capitalize_first_letter;
 
 pub mod ronstring_to_reflect_component;
-pub use ronstring_to_reflect_component::*;
 
 pub mod process_gltfs;
-pub use process_gltfs::*;
+use process_gltfs::add_components_from_gltf_extras;
 
 pub mod blender_settings;
 

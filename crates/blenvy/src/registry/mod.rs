@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 pub mod export_types;
 use bevy::asset::io::file::FileAssetReader;
-pub use export_types::*;
+use export_types::export_types;
 
 use bevy::{
     app::Startup,

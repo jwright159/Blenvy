@@ -1,4 +1,5 @@
-use crate::{AssetRoot, BlenvyConfig};
+use crate::registry::AssetRoot;
+use crate::BlenvyConfig;
 use bevy::{
     log::info,
     prelude::{AppTypeRegistry, ReflectComponent, ReflectResource, World},

@@ -2,14 +2,6 @@ use std::path::Path;
 
 use bevy::{gltf::Gltf, prelude::*, scene::SceneInstance, utils::hashbrown::HashMap};
 
-use crate::{
-    AnimationInfos, AssetLoadTracker, AssetToBlueprintInstancesMapper, BlueprintAnimationInfosLink,
-    BlueprintAnimationPlayerLink, BlueprintAnimations, BlueprintAssetsLoadState,
-    BlueprintAssetsLoaded, BlueprintAssetsNotLoaded, BlueprintMetaLoaded, BlueprintMetaLoading,
-    BlueprintPreloadAssets, InstanceAnimationInfosLink, InstanceAnimationPlayerLink,
-    InstanceAnimations, WatchingForChanges,
-};
-
 /// this is a flag component for our levels/game world
 #[derive(Component)]
 pub struct GameWorldTag;
@@ -641,12 +633,22 @@ pub(crate) fn blueprints_scenes_spawned(
     }
 }
 
+use crate::blueprints::animation::{
+    BlueprintAnimationInfosLink, BlueprintAnimationPlayerLink, BlueprintAnimations,
+    InstanceAnimationInfosLink, InstanceAnimationPlayerLink, InstanceAnimations,
+};
+use crate::blueprints::assets::{
+    AssetLoadTracker, BlueprintAssetsLoadState, BlueprintAssetsLoaded, BlueprintAssetsNotLoaded,
+    BlueprintMetaLoaded,
+};
 // could be done differently, by notifying each parent of a spawning blueprint that this child is done spawning ?
 // perhaps using component hooks or observers (ie , if a ComponentSpawning + Parent)
-use crate::CopyComponents;
+use crate::blueprints::copy_components::CopyComponents;
 use std::any::TypeId;
 
-use super::BlueprintMetaHandle;
+use super::animation::AnimationInfos;
+use super::assets::{BlueprintMetaHandle, BlueprintMetaLoading};
+use super::{AssetToBlueprintInstancesMapper, BlueprintPreloadAssets, WatchingForChanges};
 
 #[derive(Component, Reflect, Debug)]
 #[reflect(Component)]

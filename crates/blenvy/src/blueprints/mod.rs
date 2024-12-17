@@ -1,28 +1,37 @@
 pub mod spawn_from_blueprints;
+use aabb::compute_scene_aabbs;
+use animation::{
+    trigger_blueprint_animation_markers_events, trigger_instance_animation_markers_events,
+    AnimationInfo, AnimationInfos, AnimationMarkerReached, AnimationMarkers, BlueprintAnimations,
+    InstanceAnimations,
+};
+use assets::{BlueprintAsset, BlueprintAssets, BlueprintPreloadAssets};
 use bevy_common_assets::ron::RonAssetPlugin;
-pub use spawn_from_blueprints::*;
 
 pub mod animation;
-pub use animation::*;
 
 pub mod aabb;
-pub use aabb::*;
 
 pub mod assets;
-pub use assets::*;
 
 pub mod materials;
-pub use materials::*;
 
 pub mod copy_components;
-pub use copy_components::*;
 
 pub(crate) mod hot_reload;
-pub(crate) use hot_reload::*;
 
 use bevy::{prelude::*, utils::hashbrown::HashMap};
+use hot_reload::{react_to_asset_changes, AssetToBlueprintInstancesMapper};
+use materials::{inject_materials, MaterialInfo, MaterialInfos};
+use spawn_from_blueprints::{
+    blueprints_assets_loaded, blueprints_check_assets_loading,
+    blueprints_check_assets_metadata_files_loading, blueprints_cleanup_spawned_scene,
+    blueprints_finalize_instances, blueprints_prepare_metadata_file_for_spawn,
+    blueprints_prepare_spawn, blueprints_scenes_spawned, BlueprintEvent, BlueprintInfo,
+    BlueprintInstanceDisabled, HideUntilReady, SpawnBlueprint,
+};
 
-use crate::GltfComponentsSet;
+use crate::components::GltfComponentsSet;
 
 #[derive(SystemSet, Debug, Hash, PartialEq, Eq, Clone)]
 /// set for the two stages of blueprint based spawning :

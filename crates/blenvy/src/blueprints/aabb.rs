@@ -1,6 +1,8 @@
 use bevy::{math::Vec3A, prelude::*, render::primitives::Aabb};
 
-use crate::{BlenvyConfig, BlueprintReadyForFinalizing, BlueprintReadyForPostProcess};
+use crate::BlenvyConfig;
+
+use super::spawn_from_blueprints::{BlueprintReadyForFinalizing, BlueprintReadyForPostProcess};
 
 /// helper system that computes the compound aabbs of the scenes/blueprints
 pub fn compute_scene_aabbs(

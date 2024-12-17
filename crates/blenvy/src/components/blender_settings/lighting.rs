@@ -3,7 +3,7 @@ use bevy::pbr::DirectionalLightShadowMap;
 use bevy::prelude::*;
 use bevy::render::view::{ColorGrading, ColorGradingGlobal, ColorGradingSection};
 
-use crate::GltfComponentsSet;
+use crate::components::GltfComponentsSet;
 
 pub(crate) fn plugin(app: &mut App) {
     app.register_type::<BlenderBackgroundShader>()

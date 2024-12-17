@@ -1,6 +1,8 @@
 pub use bevy::prelude::*;
 
-use crate::{BlueprintInfo, GameWorldTag, HideUntilReady, SpawnBlueprint};
+use crate::blueprints::spawn_from_blueprints::{
+    BlueprintInfo, GameWorldTag, HideUntilReady, SpawnBlueprint,
+};
 
 use super::BlueprintWorld;
 

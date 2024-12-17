@@ -1,6 +1,9 @@
 use bevy::prelude::*;
 
-use crate::{BlueprintInfo, DynamicEntitiesRoot, GameWorldTag, HideUntilReady, SpawnBlueprint};
+use crate::blueprints::spawn_from_blueprints::{
+    BlueprintInfo, GameWorldTag, HideUntilReady, SpawnBlueprint,
+};
+use crate::save_load::DynamicEntitiesRoot;
 
 #[derive(Event)]
 pub struct LoadingRequest {

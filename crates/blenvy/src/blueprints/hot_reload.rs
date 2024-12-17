@@ -1,7 +1,8 @@
-use crate::{
-    BlueprintAssetsLoadState, BlueprintAssetsLoaded, BlueprintInfo, BlueprintInstanceReady,
-    BlueprintSpawning, FromBlueprint, SpawnBlueprint, SubBlueprintsSpawnTracker,
+use crate::blueprints::assets::{BlueprintAssetsLoadState, BlueprintAssetsLoaded};
+use crate::blueprints::spawn_from_blueprints::{
+    BlueprintInstanceReady, BlueprintSpawning, FromBlueprint, SubBlueprintsSpawnTracker,
 };
+use crate::blueprints::{BlueprintInfo, SpawnBlueprint};
 use bevy::asset::AssetEvent;
 use bevy::prelude::*;
 use bevy::scene::SceneInstance;

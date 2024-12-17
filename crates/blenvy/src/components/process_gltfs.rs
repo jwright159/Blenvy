@@ -13,7 +13,9 @@ use bevy::{
     utils::HashMap,
 };
 
-use crate::{ronstring_to_reflect_component, GltfProcessed};
+use crate::components::ronstring_to_reflect_component::ronstring_to_reflect_component;
+
+use super::GltfProcessed;
 
 // , mut entity_components: HashMap<Entity, Vec<(Box<dyn Reflect>, TypeRegistration)>>
 fn find_entity_components(

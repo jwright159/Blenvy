@@ -1,19 +1,19 @@
 #![doc = include_str!("../../../README.md")]
 
-use bevy::{render::primitives::Aabb, utils::HashMap};
+use bevy::{prelude::*, render::primitives::Aabb, utils::HashMap};
 use std::path::PathBuf;
 
 pub mod components;
-pub use components::*;
+use components::ComponentsFromGltfPlugin;
 
 pub mod registry;
-pub use registry::*;
+use registry::ExportRegistryPlugin;
 
 pub mod blueprints;
-pub use blueprints::*;
+use blueprints::BlueprintsPlugin;
 
 pub mod save_load;
-pub use save_load::*;
+use save_load::SaveLoadPlugin;
 
 #[derive(Clone, Resource)]
 pub struct BlenvyConfig {
