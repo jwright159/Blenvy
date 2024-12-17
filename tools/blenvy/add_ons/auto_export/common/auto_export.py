@@ -61,7 +61,10 @@ def auto_export(changes_per_scene, changes_per_collection, changes_per_material,
         for light in bpy.data.lights:
             enabled = 'true' if light.use_shadow else 'false'
             # TODO: directly set relevant components instead ?
-            light['BlenderLightShadows'] = f"(enabled: {enabled}, buffer_bias: {light.shadow_buffer_bias})"
+            if hasattr(light, 'shadow_buffer_bias'):
+                light['BlenderLightShadows'] = f"(enabled: {enabled}, buffer_bias: {light.shadow_buffer_bias})"
+            else:
+                light['BlenderLightShadows'] = f"(enabled: {enabled})"
 
         # export
         if export_blueprints_enabled:
