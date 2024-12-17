@@ -68,7 +68,7 @@ impl Default for BlenvyPlugin {
 impl Plugin for BlenvyPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins((
-            ComponentsFromGltfPlugin::default(),
+            ComponentsFromGltfPlugin,
             #[cfg(debug_assertions)] // we only need the export registry plugin at dev time
             ExportRegistryPlugin::default(),
             BlueprintsPlugin::default(),

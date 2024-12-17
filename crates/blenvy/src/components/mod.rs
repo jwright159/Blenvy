@@ -27,23 +27,21 @@ use bevy::{
 /// fn main() {
 ///    App::new()
 ///         .add_plugins(DefaultPlugins)
-///         .add_plugin(ComponentsFromGltfPlugin)
-///         .add_system(spawn_level)
+///         .add_plugins(ComponentsFromGltfPlugin)
+///         .add_systems(Startup, spawn_level)
 ///         .run();
 /// }
 ///
 /// fn spawn_level(
 ///   asset_server: Res<AssetServer>,
-///   mut commands: bevy::prelude::Commands,
-///   keycode: Res<Input<KeyCode>>,
-
+///   mut commands: Commands,
+///   keycode: Res<ButtonInput<KeyCode>>,
 /// ){
-/// if keycode.just_pressed(KeyCode::Return) {
-///  commands.spawn(SceneBundle {
-///   scene: asset_server.load("basic/models/level1.glb"),
-///   transform: Transform::from_xyz(2.0, 0.0, -5.0),
-/// ..Default::default()
-/// });
+/// if keycode.just_pressed(KeyCode::Enter) {
+///  commands.spawn((
+///   SceneRoot(asset_server.load("basic/models/level1.glb")),
+///   Transform::from_xyz(2.0, 0.0, -5.0),
+///  ));
 /// }
 ///}
 /// ```
@@ -60,7 +58,7 @@ pub enum GltfComponentsSet {
 }
 
 #[derive(Default)]
-pub struct ComponentsFromGltfPlugin {}
+pub struct ComponentsFromGltfPlugin;
 
 impl Plugin for ComponentsFromGltfPlugin {
     fn build(&self, app: &mut App) {
