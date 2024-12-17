@@ -63,7 +63,7 @@ pub fn spawn_blueprint_instance(keycode: Res<ButtonInput<KeyCode>>, mut commands
                 bevy::prelude::Name::from(format!("test{}", name_index)),
                 HideUntilReady,
                 AddToGameWorld,
-                TransformBundle::from_transform(Transform::from_xyz(x, 2.0, y)),
+                Transform::from_xyz(x, 2.0, y),
                 LinearVelocity(Vec3::new(vel_x, vel_y, vel_z)),
             ))
             .id();

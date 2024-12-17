@@ -86,7 +86,7 @@ pub(crate) fn save_game(world: &mut World) {
     let mut save_path: String = "".into();
     let mut events = world.resource_mut::<Events<SavingRequest>>();
 
-    for event in events.get_reader().read(&events) {
+    for event in events.get_cursor().read(&events) {
         info!("SAVE EVENT !! {:?}", event);
         save_path.clone_from(&event.path);
     }
@@ -112,7 +112,7 @@ pub(crate) fn save_game(world: &mut World) {
         .expect("Blenvy configuration should exist at this stage");
 
     // we hardcode some of the always allowed types
-    let filter = config
+    let filter_components = config
         .save_component_filter
         .clone()
         //.allow::<Parent>() // TODO: add back
@@ -127,7 +127,7 @@ pub(crate) fn save_game(world: &mut World) {
         ;
 
     // for root entities, it is the same EXCEPT we make sure parents are not included
-    let filter_root = filter.clone().deny::<Parent>();
+    let filter_root_components = filter_components.clone().deny::<Parent>();
 
     let filter_resources = config
         .clone()
@@ -138,7 +138,7 @@ pub(crate) fn save_game(world: &mut World) {
 
     // for default stuff
     let scene_builder = DynamicSceneBuilder::from_world(world)
-        .with_filter(filter.clone())
+        .with_component_filter(filter_components.clone())
         .with_resource_filter(filter_resources.clone());
 
     let dyn_scene = scene_builder
@@ -149,7 +149,7 @@ pub(crate) fn save_game(world: &mut World) {
 
     // for root entities
     let scene_builder_root = DynamicSceneBuilder::from_world(world)
-        .with_filter(filter_root.clone())
+        .with_component_filter(filter_root_components.clone())
         .with_resource_filter(filter_resources.clone());
 
     let mut __dyn_scene_root = scene_builder_root
