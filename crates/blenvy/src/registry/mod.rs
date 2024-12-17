@@ -1,6 +1,7 @@
 use std::path::PathBuf;
 
 pub mod export_types;
+use bevy::asset::io::file::FileAssetReader;
 pub use export_types::*;
 
 use bevy::{
@@ -47,8 +48,9 @@ impl RegistryExportApp for App {
     fn register_asset_root(&mut self) -> &mut Self {
         let asset_plugin = get_asset_plugin(self);
         let path_str = asset_plugin.file_path.clone();
-        let path = PathBuf::from(path_str);
-        self.insert_resource(AssetRoot(path))
+        let reader = FileAssetReader::new(path_str);
+        let path = reader.root_path();
+        self.insert_resource(AssetRoot(path.to_owned()))
     }
 }
 
