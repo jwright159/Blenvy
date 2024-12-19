@@ -32,7 +32,8 @@ def make_cube(name, location=[0,0,0], rotation=[0,0,0], scale=[1,1,1], collectio
 
 
     bm = bmesh.new()
-    bmesh.ops.create_cube(bm, size=0.1, matrix=mathutils.Matrix.Translation(location)) # FIXME: other ways to set position seems to fail ?
+    bm.loops.layers.uv.new("UVMap")
+    bmesh.ops.create_cube(bm, size=0.1, matrix=mathutils.Matrix.Translation(location), calc_uvs=True) # FIXME: other ways to set position seems to fail ?
     bm.to_mesh(new_mesh)
     bm.free()
 
