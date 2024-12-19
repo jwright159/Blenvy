@@ -22,7 +22,7 @@ pub(crate) mod hot_reload;
 
 use bevy::{prelude::*, utils::hashbrown::HashMap};
 use hot_reload::{react_to_asset_changes, AssetToBlueprintInstancesMapper};
-use materials::{inject_materials, MaterialInfo, MaterialInfos};
+use materials::{inject_materials, load_material_gltfs, MaterialInfo, MaterialInfos};
 use spawn_from_blueprints::{
     blueprints_assets_loaded, blueprints_check_assets_loading,
     blueprints_check_assets_metadata_files_loading, blueprints_cleanup_spawned_scene,
@@ -131,6 +131,7 @@ impl Plugin for BlueprintsPlugin {
                     blueprints_scenes_spawned,
                     blueprints_cleanup_spawned_scene,
                     // beyond this point : post processing to finalize blueprint instances
+                    load_material_gltfs,
                     inject_materials,
                     compute_scene_aabbs,
                     blueprints_finalize_instances,
